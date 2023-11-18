@@ -1,0 +1,136 @@
+automacro callori {
+	priority 0
+	weight > 10%
+	inventory "rough oridecon" > 5
+	location prontera
+	timeout 20
+	call make_ori 
+	}
+
+automacro callelu {
+	priority 1
+	weight > 10%
+	inventory "rough elunium" > 5
+	location prontera
+	timeout 20
+	call make_elu 
+	}
+
+#make elunium section#
+
+macro make_elu {
+	do c @go prontera
+	if ($.map == prontera) call prontera_bs_elu
+	if ($.map == prt_in) call prontera_bs_elu
+	if ($.map == payon) call payon_bs_elu
+	if ($.map == payon_in01) call payon_bs_elu
+	if ($.map == morocc) call morocc_bs_elu
+	if ($.map == morocc_in) call morocc_bs_elu
+	else {
+		log :::::::::: TOO FAR FROM TOWN, MACRO STOPPED
+		log :::::::::: ONLY SUPPORT BS AT PRONTERA, PAYON & MOROCC
+		stop 
+	}
+}
+	
+macro prontera_bs_elu {
+log :::::::::: MAKE ELUNIUM IN PROGRESS
+$roughelu = @invamount (rough elunium)
+		if ($roughelu >= 5) goto makeelu
+		log :::::::::: @PRONTERA: INSUFFICIENT INGREDIENTS
+		stop
+		
+		:makeelu
+		do move prt_in 63 65 
+		do talknpc 63 69 r1
+		log :::::::::: @PRONTERA: TASK DONE!
+		call prontera_bs_elu
+}
+		
+macro payon_bs_elu {
+log :::::::::: MAKE ELUNIUM IN PROGRESS
+$roughelu = @invamount (rough elunium)
+		if ($roughelu >= 5) goto makeelu
+		log :::::::::: @PAYON: INSUFFICIENT INGREDIENTS
+		stop
+		
+		:makeelu
+		do move payon 141 173
+		do talknpc 137 178 r1
+		log :::::::::: @PAYON: TASK DONE!
+		call payon_bs_elu
+}
+
+macro morocc_bs_elu {
+log :::::::::: MAKE ELUNIUM IN PROGRESS
+$roughelu = @invamount (rough elunium)
+		if ($roughelu >= 5) goto makeelu
+		log :::::::::: @MOROCC: INSUFFICIENT INGREDIENTS
+		stop
+		
+		:makeelu
+		do move morocc_in 69 32
+		do talknpc 72 32 r1
+		log :::::::::: @MOROCC: TASK DONE!
+		call morocc_bs_elu
+}
+
+#make oridecon section#
+macro make_ori {
+	do c @go prontera
+	if ($.map == prontera) call prontera_bs_ori
+	if ($.map == prt_in) call prontera_bs_ori
+	if ($.map == payon) call payon_bs_ori
+	if ($.map == payon_in01) call payon_bs_ori
+	if ($.map == morocc) call morocc_bs_ori
+	if ($.map == morocc_in) call morocc_bs_ori
+	else {
+		log :::::::::: TOO FAR FROM TOWN, MACRO STOPPED
+		log :::::::::: ONLY SUPPORT BS AT PRONTERA, PAYON & MOROCC
+		stop 
+	}
+}
+	
+macro prontera_bs_ori {
+log :::::::::: MAKE ORIDECON IN PROGRESS
+$roughori = @invamount (rough oridecon)
+		if ($roughori >= 5) goto makeori
+		log :::::::::: @PRONTERA: INSUFFICIENT INGREDIENTS
+		stop
+		
+		:makeori
+		do move prt_in 63 65 
+		do talknpc 63 69 r0
+		log :::::::::: @PRONTERA: TASK DONE!
+		call prontera_bs_ori
+}
+		
+macro payon_bs_ori {
+log :::::::::: MAKE ORIDECON IN PROGRESS
+$roughori = @invamount (rough oridecon)
+		if ($roughori >= 5) goto makeori
+		log :::::::::: @PAYON: INSUFFICIENT INGREDIENTS
+		stop
+		
+		:makeori
+		do move payon 141 173
+		do talknpc 137 178 r0
+		log :::::::::: @PAYON: TASK DONE!
+		call payon_bs_ori
+}
+
+macro morocc_bs_ori {
+log :::::::::: MAKE ORIDECON IN PROGRESS
+$roughori = @invamount (rough oridecon)
+		if ($roughori >= 5) goto makeori
+		log :::::::::: @MOROCC: INSUFFICIENT INGREDIENTS
+		stop
+		
+		:makeori
+		do move morocc_in 69 32
+		do talknpc 72 32 r0
+		log :::::::::: @MOROCC: TASK DONE!
+		call morocc_bs_ori
+}
+
+###make elunium & oridecon end###
