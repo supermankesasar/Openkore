@@ -1,0 +1,46 @@
+automacro Stuck {
+    console /Stuck during route/
+    call {
+        do @random ( "south","west","east" )
+    }
+}
+
+automacro backtoxmas {
+	location prontera
+	eval AI::isIdle
+	timeout 10
+	call {
+		do c @go xmas
+		}
+}
+
+################################
+
+automacro gotoglast {
+	location xmas
+	location not glast_01
+	timeout 15
+	call {
+		do move 137 134
+		pause 3	
+		do pm Chaterina warp 1
+		}
+}
+
+automacro movetowarp {
+   pm /(.*) (.*)/
+   exclusive 1
+   call {
+      do move $.lastMatch1 $.lastMatch2
+   }
+}
+
+automacro gettoglast {
+   location glast_01
+   timeout 10
+   call {
+		do move 77 193
+		pause 2
+		release all
+   }
+}
