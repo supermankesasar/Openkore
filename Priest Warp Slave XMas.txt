@@ -1,0 +1,26 @@
+
+automacro warp {
+   pm /warp 1/
+   location xmas
+   timeout 30
+   call {
+	log attemp Blessing on $.lastpm
+	do sp 34 $.lastpm
+	pause 1
+	log attemp inc.Agi on $.lastpm
+	do sp 29 $.lastpm
+	pause 1
+	do sl 27 136 137
+	pause 2
+	do $.lastpmMsg
+}
+}
+
+automacro portalOpened {
+   console /You opened Warp Portal on \((.*), (.*)\)/i
+   exclusive 1
+   call {
+   pause 1
+   do pm $.lastpm $.lastMatch1 $.lastMatch2
+   }
+}
